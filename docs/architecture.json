@@ -1,0 +1,58 @@
+{
+  "title": "Headroom wrap E2E tool dependencies",
+  "subtitle": "Dependency versions change; installation and test execution stay unchanged.",
+  "items": [
+    {
+      "group": "Wrap E2E test tools",
+      "id": "tools",
+      "icon": "test-tubes",
+      "items": [
+        {
+          "id": "pins",
+          "label": "Tool pins",
+          "tech": "package.json",
+          "desc": "OpenClaw and Codex versions; npm override",
+          "icon": "file-json"
+        },
+        {
+          "id": "lock",
+          "label": "Resolved dependencies",
+          "tech": "package-lock.json",
+          "desc": "Pins bundled and transitive packages",
+          "icon": "lock-keyhole"
+        },
+        {
+          "id": "install",
+          "label": "Install CLI tools",
+          "tech": "npm ci in Dockerfile",
+          "desc": "Installs reviewed lockfile into /opt/wrap-tools",
+          "icon": "package"
+        },
+        {
+          "id": "harness",
+          "label": "Wrap E2E harness",
+          "tech": "e2e/wrap/run.py",
+          "desc": "Invokes installed CLI tools during tests",
+          "icon": "terminal"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from": "pins",
+      "to": "lock",
+      "label": "resolves"
+    },
+    {
+      "from": "lock",
+      "to": "install",
+      "label": "installs"
+    },
+    {
+      "from": "install",
+      "to": "harness",
+      "label": "provides CLI tools"
+    }
+  ]
+}
